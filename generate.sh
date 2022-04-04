@@ -1,4 +1,5 @@
 #!/bin/sh
+# export UBUNTU_MENUPROXY=0 # 소용없음
 #
 # Copyright IBM Corp All Rights Reserved
 #
