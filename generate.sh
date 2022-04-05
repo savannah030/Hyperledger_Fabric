@@ -1,5 +1,5 @@
+#@echo off
 #!/bin/sh
-# export UBUNTU_MENUPROXY=0 # 소용없음
 #
 # Copyright IBM Corp All Rights Reserved
 #
@@ -11,14 +11,14 @@ CHANNEL_NAME=mychannel
 
 # remove previous crypto material and config transactions
 rm -fr config/*
-#rm -fr crypto-config/*
+rm -fr crypto-config/*
 
 # generate crypto material
-#cryptogen generate --config=./crypto-config.yaml
-#if [ "$?" -ne 0 ]; then
-#  echo "Failed to generate crypto material..."
-#  exit 1
-#fi
+cryptogen generate --config=./crypto-config.yaml
+if [ "$?" -ne 0 ]; then
+  echo "Failed to generate crypto material..."
+  exit 1
+fi
 
 # generate genesis block for orderer
 configtxgen -profile ThreeOrgOrdererGenesis -outputBlock ./config/genesis.block
@@ -41,19 +41,18 @@ if [ "$?" -ne 0 ]; then
   exit 1
 fi
 
-
 # 위의 generate anchor peer transaction이 있는 부분을 복사해 Org2, Org3용 처리 내용을 추가
 # Org2, Org3의 앵커피어도 트랜잭션 실행해야 하니까!!
 # generate anchor peer transaction
 configtxgen -profile ThreeOrgChannel -outputAnchorPeersUpdate ./config/Org2MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org2MSP
 if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org1MSP..."
+  echo "Failed to generate anchor peer update for Org2MSP..."
   exit 1
 fi
 
 # generate anchor peer transaction
 configtxgen -profile ThreeOrgChannel -outputAnchorPeersUpdate ./config/Org3MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org3MSP
 if [ "$?" -ne 0 ]; then
-  echo "Failed to generate anchor peer update for Org1MSP..."
+  echo "Failed to generate anchor peer update for Org3MSP..."
   exit 1
 fi
