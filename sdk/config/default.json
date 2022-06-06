@@ -1,13 +1,9 @@
 {
-  // ver 값을 ‘1.4’대신 ‘stub’으로 지정해 하이퍼레저 패브릭 환경에 접속하지 않고 결과를 시뮬레이트하도록 전환할 수 있다.
   "ver":"1.4",
-  //"ver":"stub",
   "waitTime":"30000",
   "asset": {
-    // 다음 users 중에서 설치 등의 운영 관리 API에서 이용할 관리자 이름을 지정
     "adminUser":"admin",
     "users":{
-      // 이용 가능한 모든 MSP 사용자 정보를 Enrollment id 키에 정의
       "admin":{
         "secret":"ry3XQB@Tk&",
         "org":"org1"
@@ -25,9 +21,7 @@
         "org":"org2"
       }
     },
-    // 클라이언트가 이용할 KeyValueStore의 파일 시스템 경로를 지정
     "keyValueStore":"./fabric-client-kvs",
-    // 오더러와 피어 설정에서 지정한 TLS 인증서의 절대 경로
     "cert_dir": "./fabric",
     "channel":{
       "name": "mychannel"
@@ -45,13 +39,11 @@
         }
       }
     },
-    // 오더러가 접속할 네트워크 설정
     "orderer": {
       "url": "grpcs://localhost:7050",
       "server-hostname": "orderer.example.com",
       "tls_cacerts": "/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem"
     },
-    // 조직 및 포함된 피어, MSP 설정
     "org1": {
       "name": "Org1",
       "mspid": "Org1MSP",
@@ -59,7 +51,7 @@
         "url": "https://localhost:17054",
         "name": "ca.org1.example.com"
       },
-      "peer1": {
+      "peer0": {
         "events": "grpcs://localhost:17053",
         "requests": "grpcs://localhost:17051",
         "server-hostname": "peer0.org1.example.com",
@@ -73,7 +65,7 @@
         "url": "https://localhost:27054",
         "name": "ca.org2.example.com"
       },
-      "peer1": {
+      "peer0": {
         "events": "grpcs://localhost:27053",
         "requests": "grpcs://localhost:27051",
         "server-hostname": "peer0.org2.example.com",
@@ -87,7 +79,7 @@
         "url": "https://localhost:37054",
         "name": "ca.org3.example.com"
       },
-      "peer1": {
+      "peer0": {
         "events": "grpcs://localhost:37053",
         "requests": "grpcs://localhost:37051",
         "server-hostname": "peer0.org3.example.com",
@@ -97,7 +89,6 @@
   },
 
   "request-timeout" : 60000,
-  // 웹 응용 프로그램의 로그인용 사용자 ID와 enrollment ID 매핑
   "users":{
     "admin":{
       "enrollId": "admin",
@@ -116,6 +107,5 @@
       "name": "Charlie"
     }
   },
-  // 웹 응용 프로그램쪽 기본 인증 패스워드
   "password":"fabric"
 }
